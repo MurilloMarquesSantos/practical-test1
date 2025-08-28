@@ -1,10 +1,25 @@
 package com.example.api.domain.dto;
 
+import com.example.api.domain.Address;
+
+import java.util.List;
+
 public class CustomerDto {
 
     private String name;
 
     private String email;
+
+    private List<Address> addresses;
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public CustomerDto setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+        return this;
+    }
 
     public String getName() {
         return name;
