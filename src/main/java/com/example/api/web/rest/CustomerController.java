@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.api.domain.dto.CustomerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,8 +35,8 @@ public class CustomerController {
 	}
 
     @PostMapping
-    public Customer save(@RequestBody CustomerDto customerDto) {
-        return service.save(customerDto);
+    public ResponseEntity<Customer> save(@RequestBody CustomerDto customerDto) {
+        return new ResponseEntity<>(service.save(customerDto), HttpStatus.CREATED);
     }
 
 }
