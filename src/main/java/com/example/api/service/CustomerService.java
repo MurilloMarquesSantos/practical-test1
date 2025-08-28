@@ -39,6 +39,7 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
+        customer.setAddresses(customerDto.getAddresses());
         return repository.save(customer);
     }
 
