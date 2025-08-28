@@ -1,5 +1,6 @@
 package com.example.api.service;
 
+import com.example.api.domain.Address;
 import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerDto;
 import com.example.api.exception.CustomerNotFoundException;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +41,14 @@ public class CustomerService {
         Customer customer = new Customer();
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
-        customer.setAddresses(customerDto.getAddresses());
+
+        List<Address> addresses = new ArrayList<>();
+        relateAddressToCostumer(customerDto, customer, addresses);
+
+        customer.setAddresses(addresses);
         return repository.save(customer);
     }
+
 
     public void update(CustomerDto customerDto, Long id) {
         validateData(customerDto);
@@ -51,14 +58,26 @@ public class CustomerService {
         repository.save(customer);
     }
 
-    private void validateData(CustomerDto customerDto) {
-        for (ValidateData validation : strategyList) {
-            validation.execute(customerDto);
-        }
-    }
 
     public void delete(Long id) {
         Customer customer = findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         repository.deleteById(customer.getId());
     }
+
+    private void validateData(CustomerDto customerDto) {
+        for (ValidateData validation : strategyList) {
+            validation.execute(customerDto);
+        }
+    }
+    private static void relateAddressToCostumer(CustomerDto customerDto, Customer customer, List<Address> addresses) {
+        for (Address addressDto : customerDto.getAddresses()) {
+            Address address = new Address();
+            address.setStreet(addressDto.getStreet());
+            address.setCity(addressDto.getCity());
+            address.setCustomer(customer);
+            addresses.add(address);
+        }
+    }
+
+
 }
