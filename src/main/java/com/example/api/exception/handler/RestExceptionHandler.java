@@ -1,6 +1,5 @@
 package com.example.api.exception.handler;
 
-import com.example.api.exception.CustomerNotFoundException;
 import com.example.api.exception.ExceptionDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
