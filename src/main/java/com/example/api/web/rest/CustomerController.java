@@ -4,12 +4,12 @@ import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerDto;
 import com.example.api.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
@@ -22,15 +22,16 @@ public class CustomerController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Customer> findAll() {
-        return service.findAll();
-    }
 
     @GetMapping("/{id}")
     public Customer findById(@PathVariable Long id) {
         return service.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+    }
+
+    @GetMapping()
+    public ResponseEntity<Page<Customer>> findAll(Pageable pageable) {
+        return new ResponseEntity<>(service.findAll(pageable), HttpStatus.OK);
     }
 
     @PostMapping

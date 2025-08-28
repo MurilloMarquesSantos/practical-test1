@@ -6,6 +6,8 @@ import com.example.api.exception.CustomerNotFoundException;
 import com.example.api.repository.CustomerRepository;
 import com.example.api.validator.ValidateData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class CustomerService {
         this.strategyList = strategies;
     }
 
-    public List<Customer> findAll() {
-        return repository.findAllByOrderByNameAsc();
+    public Page<Customer> findAll(Pageable pageable) {
+        return repository.findAllByOrderByNameAsc(pageable);
     }
 
     public Optional<Customer> findById(Long id) {
