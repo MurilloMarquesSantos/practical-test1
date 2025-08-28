@@ -49,4 +49,12 @@ public class Customer {
 		this.email = email;
 	}
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public Customer setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+        return this;
+    }
 }
