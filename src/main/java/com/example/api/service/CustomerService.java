@@ -53,4 +53,9 @@ public class CustomerService {
             validation.execute(customerDto);
         }
     }
+
+    public void delete(Long id) {
+        Customer customer = findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+        repository.deleteById(customer.getId());
+    }
 }
