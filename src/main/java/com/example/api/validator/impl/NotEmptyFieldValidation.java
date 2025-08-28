@@ -6,7 +6,7 @@ import com.example.api.validator.ValidateData;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NotEmptyField implements ValidateData {
+public class NotEmptyFieldValidation implements ValidateData {
 
     @Override
     public void execute(CustomerDto customerDto) {
