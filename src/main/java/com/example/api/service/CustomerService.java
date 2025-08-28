@@ -55,6 +55,13 @@ public class CustomerService {
         Customer customer = findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
+        customer.getAddresses().clear();
+
+        for (Address address : customerDto.getAddresses()) {
+            address.setCustomer(customer);
+            customer.getAddresses().add(address);
+        }
+
         repository.save(customer);
     }
 
@@ -69,6 +76,7 @@ public class CustomerService {
             validation.execute(customerDto);
         }
     }
+
     private static void relateAddressToCostumer(CustomerDto customerDto, Customer customer, List<Address> addresses) {
         for (Address addressDto : customerDto.getAddresses()) {
             Address address = new Address();
