@@ -1,5 +1,7 @@
 package com.example.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     public Long getId() {
@@ -41,6 +44,15 @@ public class Address {
 
     public Address setCity(String city) {
         this.city = city;
+        return this;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Address setCustomer(Customer customer) {
+        this.customer = customer;
         return this;
     }
 }
