@@ -2,12 +2,12 @@ package com.example.api.service;
 
 import com.example.api.domain.Customer;
 import com.example.api.domain.dto.CustomerDto;
+import com.example.api.exception.CustomerNotFoundException;
 import com.example.api.repository.CustomerRepository;
 import com.example.api.validator.ValidateData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +38,14 @@ public class CustomerService {
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
         return repository.save(customer);
+    }
+
+    public void update(CustomerDto customerDto, Long id) {
+        validateData(customerDto);
+        Customer customer = findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+        customer.setName(customerDto.getName());
+        customer.setEmail(customerDto.getEmail());
+        repository.save(customer);
     }
 
     private void validateData(CustomerDto customerDto) {
