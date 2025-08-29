@@ -29,7 +29,7 @@ public class CustomerController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Page<Customer>> findAll(Pageable pageable) {
         return new ResponseEntity<>(service.findAll(pageable), HttpStatus.OK);
     }
