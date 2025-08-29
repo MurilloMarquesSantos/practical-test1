@@ -7,14 +7,15 @@
 
 ### Rodando
 
-1. Clone o projeto: `https://github.com/allanalves92/practical-test.git`
+1. Clone o projeto: `https://github.com/MurilloMarquesSantos/practical-test1`
 1. Entre na pasta `practical-test` e execute: `mvn spring-boot:run`
 1. Acesse: `http://localhost:8080/customers`
 
 ### Features
 
 1. ✅ Endpoints para criar, editar e excluir customer
-2. ✅ Dados validados antes de salvar e editar um customer 
+2. ✅ Dados validados antes de salvar e editar um customer
+3. ✅ Criação de DTOs para formulários POST/PUT
    - Validação para regex com email e restrições para nome e e-mail não vazios usando padrão de projeto Strategy.
 4. ✅ Customer paginados
 5. ✅ Adição do campo "Address" para o Customer e relação de `@OneToMany` entre Customer e Address 
