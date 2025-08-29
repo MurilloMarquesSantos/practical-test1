@@ -38,6 +38,7 @@ public class CustomerDto {
         this.email = email;
         return this;
     }
+    public CustomerDto(){}
 
     public CustomerDto(String name, String email) {
         this.name = name;
