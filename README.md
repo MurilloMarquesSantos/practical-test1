@@ -15,7 +15,7 @@
 
 1. ✅ Endpoints para criar, editar e excluir customer
 2. ✅ Dados validados antes de salvar e editar um customer 
-   - Validação para regex com email e restrições para nome e e-mail não vazios.
+   - Validação para regex com email e restrições para nome e e-mail não vazios usando padrão de projeto Strategy.
 4. ✅ Customer paginados
 5. ✅ Adição do campo "Address" para o Customer e relação de `@OneToMany` entre Customer e Address 
 6. ✅ Tratamento de exceções com `@RestControllerAdvice` e exceções personalizadas para melhor resposta
